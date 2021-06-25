@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>project</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+		<link href="css/basictable.css" rel="stylesheet" />
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-lg-5">
+                <a class="navbar-brand" href="index.html">天氣預報</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">台北</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">北部</a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="a.html">臺北市</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">中部</a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">南部</a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">東部</a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="wrapper" id="showData">
+        	<table class="table" id="table">
+           	</table>       
+        </div>
+            
+        </main>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script src="js/basictable.min.js"></script>
+		<script  type="text/javascript" src="js/jquery.basictable.min.js"></script>
+		
+    </body>
+</html>
+
+
+<script>
+    $(document).ready(function () {
+        $.getJSON("weather.json", function (data) {
+
+            var row_key = ["臺北市"];
+            var arrItems = [];      // THE ARRAY TO STORE JSON ITEMS.
+            $.each(data, function (index, value) {
+            	$.each(value.dataset.locations.location,function(inde, valu){
+            		
+            		console.log(row_key.includes(valu.locationName));
+                	if (row_key.includes(valu.locationName)==true){
+                		var d={};
+	                	$.each(valu.weatherElement,function(ind, val){
+	                		if(val.elementName=="T"){
+	                			$.each(val.time,function(i, v){
+	                    			d[v.startTime]=v.elementValue.value;
+	                    		});		
+	                		}
+	                	});
+	                	arrItems.push(d);
+                	}
+                	
+            	});
+            });
+            console.log(arrItems);
+            console.log(row_key);
+        	
+            // EXTRACT VALUE FOR TABLE HEADER.
+            var col_key = [];
+            for (var key in arrItems[0]) {
+//             	console.log(key)
+                if (col_key.indexOf(key) === -1) {
+                	col_key.push(key);
+                }
+            }
+        
+            console.log(col_key);
+//             console.log(col_key[0]);
+// 			console.log(arrItems[0][col_key[0]]);
+//             CREATE DYNAMIC TABLE.
+			var table_head = document.getElementById("table");
+            var table_body = document.getElementById("table");
+            newcontent = '<thead><tr>';
+            newcontent+='<th >縣市</th>';
+            newcontent+='<th >時間</th>';
+            
+            
+            for (var i = 0; i < col_key.length; i+=2) {
+            	var k = col_key[i].split("T");
+            	newcontent+='<th id =\'Country\'>'+k[0]+'</th>';
+            }
+            table_body.insertAdjacentHTML('afterbegin', newcontent);
+            // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+                              // TABLE ROW.
+
+//             for (var i = 0; i < col.length; i++) {
+//                 var th = document.createElement("th");      // TABLE HEADER.
+//                 th.innerHTML = col[i];
+//                 tr.appendChild(th);
+//             }
+			
+            // ADD JSON DATA TO THE TABLE AS ROWS.
+            for (var i = 0; i < row_key.length; i++) {
+            	newcontent = '<tbody><tr>';
+            	newcontent +='<td data-th="縣市" rowspan="2">'+row_key[i]+'</td>';
+            	newcontent +='<td data-th="時間">早上</td>';
+            	for (j=0;j<col_key.length;j+=2){
+            		var k = col_key[j].split("T");
+            		newcontent+='<td data-th=\"'+k[0]+'\">'+ arrItems[i][col_key[j]] +'℃</td>';
+ 
+            	}
+            	newcontent+='</tr>';
+            	
+            	newcontent+='<tr>';
+            	newcontent +='<td data-th="時間">下午</td>';
+            	for (j=1;j<col_key.length;j+=2){
+            		var k = col_key[j].split("T");
+            		newcontent+='<td data-th=\"'+k[0]+'\">'+ arrItems[i][col_key[j]] +'℃</td>';
+
+            	}
+            	newcontent+="</tr></tbody>";
+            	table_body.insertAdjacentHTML('beforeend', newcontent);
+            	
+				
+				
+            }
+
+            // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+            var divContainer = document.getElementById("showData");
+            divContainer.innerHTML = "";
+            divContainer.appendChild(table_body);
+        });
+    });
+</script>
+

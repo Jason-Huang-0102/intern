@@ -1,4 +1,4 @@
-
+//Maximum Subarray
 //Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 //Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
 //Output: 6
@@ -11,13 +11,14 @@ public class Easy53 {
 	public static void main(String[] args)
 	{
 		long t1 = System.currentTimeMillis();
-		int[] nums= new int[5];
-		for(int i=0;i<5;i++)
+		int[] nums= new int[10];
+		for(int i=0;i<nums.length;i++)
 		{
 			nums[i]=10-(int)(Math.random()*20);
 			System.out.print(nums[i]);
 			System.out.print(' ');
 		}
+		System.out.println();
 		maxSubArray(nums);
 		long t2 = System.currentTimeMillis();
 		System.out.println(t2-t1);

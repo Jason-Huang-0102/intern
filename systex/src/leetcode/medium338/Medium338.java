@@ -7,7 +7,27 @@
 //0 --> 0
 //1 --> 1
 //2 --> 10
+
+// another solution 1 : An easy recurrence for this problem is f[i] = f[i / 2] + i % 2.
+//for (int i=1; i<=num; i++) f[i] = f[i >> 1] + (i & 1);
+
+// another solution 2 : 利用1、2、4、8...(二的倍數)當作基底，ex:9=8+1  12=8+4  .....
+//int[] ret = new int[num+1];
+//    ret[0] = 0;
+//    int pow = 1;
+//    for(int i = 1, t = 0; i <= num; i++, t++) {
+//        if(i == pow) {
+//            pow *= 2;
+//            t = 0;
+//        }
+//        ret[i] = ret[t] + 1;
+//    }
+//    return ret;
+
+
 package leetcode.medium338;
+
+
 
 public class Medium338 {
 	public static void main(String[] args)

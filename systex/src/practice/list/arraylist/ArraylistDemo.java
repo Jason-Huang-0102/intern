@@ -9,6 +9,10 @@ public class ArraylistDemo {
 		  list1.add("Banana");  
 		  list1.add("Grapes");  
 		  //Sorting the list  
+		  for(String fruit:list1)  
+			    System.out.println(fruit);
+		  System.out.println("-------------------");
+		  
 		  list1.set(1,"Dates");  
 		  Collections.sort(list1);  
 		   //Traversing list through the for-each loop  
